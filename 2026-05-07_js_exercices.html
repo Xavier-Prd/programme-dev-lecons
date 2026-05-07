@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS Moderne — Session 01 — 7 mai 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0b0e1a;
+      color: #e2e8f0;
+      font-family: 'Syne', sans-serif;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    code, pre, .mono { font-family: 'Share Tech Mono', monospace; }
+    .header {
+      border-left: 4px solid #60a5fa;
+      padding-left: 1rem;
+      margin-bottom: 2rem;
+    }
+    .header .label {
+      font-family: 'Share Tech Mono', monospace;
+      color: #60a5fa;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .header h1 { font-size: 1.6rem; font-weight: 700; color: #fff; }
+    .header .meta { font-size: 0.85rem; color: #64748b; margin-top: 0.25rem; font-family: 'Share Tech Mono', monospace; }
+    .section-intro {
+      background: #111627;
+      border: 1px solid #1e2a45;
+      border-radius: 2px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .section-intro h2 {
+      font-size: 0.75rem;
+      font-family: 'Share Tech Mono', monospace;
+      color: #60a5fa;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .section-intro p { font-size: 0.9rem; line-height: 1.8; color: #94a3b8; margin-bottom: 0.75rem; }
+    .section-intro p:last-child { margin-bottom: 0; }
+    pre {
+      background: #0b0e1a;
+      border: 1px solid #1e2a45;
+      border-radius: 2px;
+      padding: 1rem;
+      font-size: 0.85rem;
+      color: #60a5fa;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+      line-height: 1.6;
+    }
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    .concept-pill {
+      background: #161d30;
+      border: 1px solid #1e2a45;
+      border-radius: 2px;
+      padding: 0.4rem 0.75rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      color: #60a5fa;
+    }
+    .exercice {
+      background: #111627;
+      border: 1px solid #1e2a45;
+      border-radius: 2px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .exercice-header {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 0.75rem;
+    }
+    .exercice-num {
+      font-family: 'Share Tech Mono', monospace;
+      color: #f5d800;
+      font-size: 1.1rem;
+      font-weight: 700;
+      min-width: 2rem;
+    }
+    .exercice-titre { font-size: 1rem; font-weight: 600; color: #fff; }
+    .enonce {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+    .contraintes {
+      background: #161d30;
+      border-left: 3px solid #f5d800;
+      border-radius: 2px;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      margin-bottom: 1rem;
+    }
+    .contraintes strong { color: #f5d800; display: block; margin-bottom: 0.4rem; font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; }
+    .contraintes ul { padding-left: 1.2rem; }
+    .contraintes li { margin-bottom: 0.2rem; }
+    .starter {
+      background: #0b0e1a;
+      border: 1px solid #1e2a45;
+      border-left: 3px solid #60a5fa;
+      border-radius: 2px;
+      padding: 1rem;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.85rem;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+    .starter .label-starter {
+      color: #60a5fa;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .criteres {
+      background: #161d30;
+      border-left: 3px solid #34d399;
+      border-radius: 2px;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+    }
+    .criteres strong { color: #34d399; display: block; margin-bottom: 0.4rem; font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; }
+    .criteres ul { padding-left: 1.2rem; }
+    .criteres li { margin-bottom: 0.2rem; }
+    .difficulte {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 0.2rem;
+    }
+    .difficulte.hard { color: #f87171; }
+    .divider {
+      border: none;
+      border-top: 1px solid #1e2a45;
+      margin: 2rem 0;
+    }
+    .footer {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      color: #334155;
+      text-align: center;
+      margin-top: 3rem;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="label">JS/Next.js · Session 01 · 07 mai 2026</div>
+  <h1>JavaScript Moderne</h1>
+  <div class="meta">Thème : const/let · arrow functions · destructuring · spread · modules ES6 · ~75 min</div>
+</div>
+
+<!-- INTRO -->
+<div class="section-intro">
+  <h2>◈ Introduction (20%)</h2>
+
+  <p>JavaScript a beaucoup évolué depuis ES6 (2015). On abandonne <code>var</code> pour deux nouveaux mots-clés : <code>const</code> (valeur qui ne changera pas) et <code>let</code> (valeur qui peut changer). Cette distinction rend le code plus prévisible.</p>
+
+  <p>Les <strong>arrow functions</strong> sont une syntaxe compacte pour écrire des fonctions :</p>
+  <pre>// Fonction classique
+function double(n) { return n * 2; }
+
+// Arrow function équivalente
+const double = (n) => n * 2;</pre>
+
+  <p>Le <strong>destructuring</strong> permet d'extraire des valeurs d'un tableau ou d'un objet en une ligne :</p>
+  <pre>const [a, b] = [10, 20];              // tableau
+const { nom, age } = { nom: "Alice", age: 30 }; // objet</pre>
+
+  <p>L'opérateur <strong>spread</strong> (<code>...</code>) étale les éléments d'un tableau ou d'un objet :</p>
+  <pre>const arr1 = [1, 2, 3];
+const arr2 = [...arr1, 4, 5];  // [1, 2, 3, 4, 5]</pre>
+
+  <p>Les <strong>modules ES6</strong> permettent d'organiser le code en fichiers séparés avec <code>export</code> et <code>import</code>. Tu les verras en action dans les exercices avancés.</p>
+
+  <div class="concept-grid">
+    <div class="concept-pill">const / let</div>
+    <div class="concept-pill">arrow functions</div>
+    <div class="concept-pill">destructuring</div>
+    <div class="concept-pill">spread operator</div>
+    <div class="concept-pill">modules ES6</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- Exercice 1 -->
+<div class="exercice">
+  <div class="exercice-header">
+    <div class="exercice-num">01</div>
+    <div>
+      <div class="exercice-titre">const vs let — trouver les erreurs</div>
+      <div class="difficulte">⏱ ~8 min</div>
+    </div>
+  </div>
+  <div class="enonce">
+    Le code ci-dessous contient des erreurs liées à l'utilisation de <code>const</code> et <code>let</code>.
+    Identifie chaque erreur, explique pourquoi c'est une erreur, et propose la correction.
+  </div>
+  <div class="starter">
+    <span class="label-starter">— Starter code (à corriger)</span>
+const score = 0;
+score = 10;           // ligne A
+
+let pseudo = "Xavier";
+let pseudo = "Alex";  // ligne B
+
+const joueurs = ["Alice", "Bob"];
+joueurs.push("Clara"); // ligne C — erreur ou pas ?
+
+var ancienStyle = "à éviter";  // ligne D — pourquoi ?</div>
+  <div class="criteres">
+    <strong>CRITÈRES DE RÉUSSITE</strong>
+    <ul>
+      <li>Tu sais expliquer pourquoi la ligne A plante</li>
+      <li>Tu sais pourquoi la ligne B plante</li>
+      <li>Tu sais si la ligne C est une erreur (et pourquoi)</li>
+      <li>Tu peux expliquer pourquoi on évite <code>var</code></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Exercice 2 -->
+<div class="exercice">
+  <div class="exercice-header">
+    <div class="exercice-num">02</div>
+    <div>
+      <div class="exercice-titre">Arrow functions — réécriture</div>
+      <div class="difficulte">⏱ ~10 min</div>
+    </div>
+  </div>
+  <div class="enonce">
+    Réécris chacune des fonctions classiques ci-dessous en arrow function.
+    Certaines peuvent tenir en une seule ligne (sans accolades ni <code>return</code> explicite).
+  </div>
+  <div class="starter">
+    <span class="label-starter">— À réécrire</span>
+// 1. Salutation
+function saluer(prenom) {
+  return "Bonjour " + prenom + " !";
+}
+
+// 2. Carré d'un nombre
+function carre(n) {
+  return n * n;
+}
+
+// 3. Filtrer les majeurs
+function filtrerMajeurs(personnes) {
+  return personnes.filter(function(p) {
+    return p.age >= 18;
+  });
+}
+
+// 4. Fonction sans paramètre
+function direBonjour() {
+  console.log("Bonjour !");
+}</div>
+  <div class="criteres">
+    <strong>CRITÈRES DE RÉUSSITE</strong>
+    <ul>
+      <li>Les fonctions 1 et 2 tiennent sur une ligne (implicit return)</li>
+      <li>La fonction 3 utilise une arrow function imbriquée dans <code>.filter()</code></li>
+      <li>La fonction 4 est convertie correctement (pas de paramètre → <code>()</code>)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Exercice 3 -->
+<div class="exercice">
+  <div class="exercice-header">
+    <div class="exercice-num">03</div>
+    <div>
+      <div class="exercice-titre">Destructuring — extraire des données</div>
+      <div class="difficulte">⏱ ~12 min</div>
+    </div>
+  </div>
+  <div class="enonce">
+    Utilise le destructuring pour extraire les données demandées depuis les structures ci-dessous.
+    Ne modifie pas les données sources — utilise uniquement la syntaxe de destructuring.
+  </div>
+  <div class="starter">
+    <span class="label-starter">— Données sources</span>
+const couleurs = ["rouge", "vert", "bleu", "jaune"];
+const utilisateur = {
+  nom: "Pardo",
+  prenom: "Xavier",
+  adresse: {
+    ville: "Paris",
+    codePostal: "75001"
+  },
+  scores: [42, 87, 91]
+};
+
+// À toi de faire :
+// 1. Extrais "rouge" et "bleu" depuis couleurs (ignore "vert")
+// 2. Extrais nom et prenom depuis utilisateur
+// 3. Extrais la ville depuis l'objet adresse imbriqué
+// 4. Extrais le meilleur score (91) depuis scores
+// 5. Crée une variable "reste" qui contient ["vert", "bleu", "jaune"] (avec rest operator)</div>
+  <div class="criteres">
+    <strong>CRITÈRES DE RÉUSSITE</strong>
+    <ul>
+      <li>Utilises la virgule pour "sauter" un élément dans le tableau</li>
+      <li>Utilises le destructuring imbriqué pour la ville</li>
+      <li>Utilises <code>...reste</code> pour capturer le reste d'un tableau</li>
+      <li>Toutes les variables sont créées avec <code>const</code></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Exercice 4 -->
+<div class="exercice">
+  <div class="exercice-header">
+    <div class="exercice-num">04</div>
+    <div>
+      <div class="exercice-titre">Spread — fusionner et copier</div>
+      <div class="difficulte">⏱ ~12 min</div>
+    </div>
+  </div>
+  <div class="enonce">
+    L'opérateur spread <code>...</code> permet de copier ou fusionner tableaux et objets sans les modifier.
+    Complète les tâches ci-dessous.
+  </div>
+  <div class="starter">
+    <span class="label-starter">— Starter code</span>
+const equipeA = ["Alice", "Bob", "Clara"];
+const equipeB = ["David", "Emma"];
+
+const profil = { nom: "Xavier", role: "dev" };
+const stats = { niveau: 3, xp: 1200 };
+
+// 1. Crée une variable "touteEquipe" qui fusionne equipeA et equipeB
+//    → ["Alice", "Bob", "Clara", "David", "Emma"]
+
+// 2. Ajoute "Frank" au début et "Grace" à la fin, sans modifier equipeA
+//    → ["Frank", "Alice", "Bob", "Clara", "Grace"]
+
+// 3. Fusionne profil et stats en un seul objet "personnage"
+
+// 4. Mets à jour le role de personnage en "senior dev" sans muter l'objet original
+//    Indice : crée un nouvel objet avec spread + la propriété mise à jour
+
+// 5. Pourquoi ne pas faire : const copie = equipeA ?
+//    Teste et explique ce qui se passe si tu modifies "copie"</div>
+  <div class="criteres">
+    <strong>CRITÈRES DE RÉUSSITE</strong>
+    <ul>
+      <li>Toutes les fusions créent de nouveaux tableaux/objets (pas de mutation)</li>
+      <li>La mise à jour du rôle utilise <code>{ ...personnage, role: "senior dev" }</code></li>
+      <li>Tu peux expliquer la différence entre copie par référence et copie par valeur</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Exercice 5 -->
+<div class="exercice">
+  <div class="exercice-header">
+    <div class="exercice-num">05</div>
+    <div>
+      <div class="exercice-titre">Mini-projet — traitement d'une liste de produits</div>
+      <div class="difficulte">⏱ ~20 min · <span class="difficulte hard">exercice intégrateur</span></div>
+    </div>
+  </div>
+  <div class="enonce">
+    Tu reçois une liste de produits d'une API. Utilise tout ce que tu as appris dans cette session
+    pour transformer et analyser ces données. Toutes les fonctions doivent être des arrow functions.
+  </div>
+  <div class="starter">
+    <span class="label-starter">— Données et tâches</span>
+const produits = [
+  { id: 1, nom: "Clavier mécanique", prix: 129, categorie: "hardware", stock: 15 },
+  { id: 2, nom: "Souris ergonomique", prix: 79,  categorie: "hardware", stock: 0  },
+  { id: 3, nom: "VS Code Theme",     prix: 9,   categorie: "software", stock: 999 },
+  { id: 4, nom: "Webcam HD",         prix: 89,  categorie: "hardware", stock: 7  },
+  { id: 5, nom: "Abonnement GitHub", prix: 48,  categorie: "software", stock: 999 },
+];
+
+// TÂCHE 1 : Extrais uniquement les noms de tous les produits dans un tableau
+// Résultat attendu : ["Clavier mécanique", "Souris ergonomique", ...]
+
+// TÂCHE 2 : Filtre les produits en stock (stock > 0) — arrow function
+
+// TÂCHE 3 : Calcule le prix total du panier si on achète 1 exemplaire de chaque produit en stock
+
+// TÂCHE 4 : Trouve le produit le plus cher
+// Indice : utilise .reduce()
+
+// TÂCHE 5 : Crée un nouveau tableau de produits avec une réduction de 10%
+// Chaque objet doit avoir un champ "prix_reduit" arrondi à 2 décimales
+// Ne modifie pas le tableau original</div>
+  <div class="criteres">
+    <strong>CRITÈRES DE RÉUSSITE</strong>
+    <ul>
+      <li>TÂCHE 1 : utilise <code>.map()</code> avec une arrow function</li>
+      <li>TÂCHE 2 : utilise <code>.filter()</code> avec une arrow function</li>
+      <li>TÂCHE 3 : chaîne <code>.filter()</code> et <code>.reduce()</code></li>
+      <li>TÂCHE 4 : <code>.reduce()</code> compare les prix à chaque itération</li>
+      <li>TÂCHE 5 : <code>.map()</code> utilise spread pour copier l'objet et ajouter le champ</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">JS/Next.js Session 01 · 07-05-2026 · Sans corrections · programme_dev</div>
+
+</body>
+</html>

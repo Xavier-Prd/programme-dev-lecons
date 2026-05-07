@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruby — Méthodes — 7 mai 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0b0e1a;
+      color: #e2e8f0;
+      font-family: 'Syne', sans-serif;
+      padding: 2rem;
+      min-height: 100vh;
+    }
+    code, pre, .mono { font-family: 'Share Tech Mono', monospace; }
+    .header {
+      border-left: 4px solid #f87171;
+      padding-left: 1rem;
+      margin-bottom: 2rem;
+    }
+    .header .label {
+      font-family: 'Share Tech Mono', monospace;
+      color: #f87171;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .header h1 { font-size: 1.6rem; font-weight: 700; color: #fff; }
+    .header .meta { font-size: 0.85rem; color: #64748b; margin-top: 0.25rem; font-family: 'Share Tech Mono', monospace; }
+    .badge {
+      display: inline-block;
+      background: #f87171;
+      color: #0b0e1a;
+      font-size: 0.7rem;
+      font-weight: 700;
+      font-family: 'Share Tech Mono', monospace;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-right: 0.5rem;
+    }
+    .badge.yellow { background: #f5d800; }
+    .exercice {
+      background: #111627;
+      border: 1px solid #1e2a45;
+      border-radius: 2px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .exercice-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      gap: 0.75rem;
+    }
+    .exercice-num {
+      font-family: 'Share Tech Mono', monospace;
+      color: #f5d800;
+      font-size: 1.1rem;
+      font-weight: 700;
+      min-width: 2rem;
+    }
+    .exercice-titre { font-size: 1rem; font-weight: 600; color: #fff; }
+    .enonce {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+    .contraintes {
+      background: #161d30;
+      border-left: 3px solid #f5d800;
+      border-radius: 2px;
+      padding: 0.75rem 1rem;
+      font-size: 0.85rem;
+      color: #cbd5e1;
+      margin-bottom: 1rem;
+    }
+    .contraintes strong { color: #f5d800; display: block; margin-bottom: 0.4rem; font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; letter-spacing: 0.1em; }
+    .contraintes ul { padding-left: 1.2rem; }
+    .contraintes li { margin-bottom: 0.2rem; }
+    pre {
+      background: #0b0e1a;
+      border: 1px solid #1e2a45;
+      border-radius: 2px;
+      padding: 1rem;
+      font-size: 0.85rem;
+      color: #60a5fa;
+      overflow-x: auto;
+      margin: 0.75rem 0;
+      line-height: 1.6;
+    }
+    details {
+      background: #161d30;
+      border: 1px solid #f87171;
+      border-radius: 2px;
+      margin-top: 1rem;
+    }
+    details summary {
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      color: #f87171;
+      letter-spacing: 0.1em;
+      user-select: none;
+    }
+    details summary:hover { color: #fff; }
+    details .correction-body {
+      padding: 1rem;
+      border-top: 1px solid #1e2a45;
+    }
+    .difficulte {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .difficulte.hard { color: #f87171; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="label">Ruby · Session 01 · 07 mai 2026</div>
+  <h1>Les méthodes en Ruby</h1>
+  <div class="meta">Thème : Ruby fondamentaux — Sous-thème : méthodes · Difficulté : débutant · ~35 min</div>
+</div>
+
+<!-- Exercice 1 -->
+<div class="exercice">
+  <div class="exercice-header">
+    <div class="exercice-num">01</div>
+    <div>
+      <div class="exercice-titre">Première méthode — saluer</div>
+      <div class="difficulte">⏱ ~5 min</div>
+    </div>
+  </div>
+  <div class="enonce">
+    Crée une méthode <code>saluer</code> qui prend un prénom en paramètre et retourne la chaîne
+    <code>"Bonjour, [prénom] !"</code>. Teste-la avec plusieurs prénoms.
+  </div>
+  <div class="contraintes">
+    <strong>CONTRAINTES</strong>
+    <ul>
+      <li>Utilise le mot-clé <code>def</code> et <code>end</code></li>
+      <li>Utilise l'interpolation de chaîne <code>#{...}</code></li>
+      <li>Appelle la méthode au moins 3 fois avec des prénoms différents</li>
+      <li>Affiche le résultat avec <code>puts</code></li>
+    </ul>
+  </div>
+  <details>
+    <summary>▶ VOIR LA CORRECTION</summary>
+    <div class="correction-body">
+<pre>def saluer(prenom)
+  "Bonjour, #{prenom} !"
+end
+
+puts saluer("Xavier")
+puts saluer("Clément")
+puts saluer("Alice")</pre>
+      <div class="enonce" style="margin-top:0.75rem;">
+        💡 En Ruby, la dernière expression évaluée dans une méthode est automatiquement retournée.
+        Le mot-clé <code>return</code> est optionnel (mais utilisable).
+      </div>
+    </div>
+  </details>
+</div>
+
+<!-- Exercice 2 -->
+<div class="exercice">
+  <div class="exercice-header">
+    <div class="exercice-num">02</div>
+    <div>
+      <div class="exercice-titre">Paramètres par défaut</div>
+      <div class="difficulte">⏱ ~8 min</div>
+    </div>
+  </div>
+  <div class="enonce">
+    Crée une méthode <code>presenter</code> qui prend deux paramètres : <code>nom</code> et
+    <code>role</code> (avec <code>"développeur"</code> comme valeur par défaut).
+    Elle retourne <code>"Je m'appelle [nom] et je suis [role]."</code>.
+    <br><br>
+    Appelle-la une fois avec les deux paramètres, et une fois sans fournir le rôle.
+  </div>
+  <div class="contraintes">
+    <strong>CONTRAINTES</strong>
+    <ul>
+      <li>Utilise la syntaxe <code>def presenter(nom, role = "...")</code></li>
+      <li>Teste les deux cas d'appel</li>
+      <li>Affiche les résultats</li>
+    </ul>
+  </div>
+  <details>
+    <summary>▶ VOIR LA CORRECTION</summary>
+    <div class="correction-body">
+<pre>def presenter(nom, role = "développeur")
+  "Je m'appelle #{nom} et je suis #{role}."
+end
+
+puts presenter("Xavier", "ingénieur")
+puts presenter("Clément")
+# => "Je m'appelle Clément et je suis développeur."</pre>
+    </div>
+  </details>
+</div>
+
+<!-- Exercice 3 -->
+<div class="exercice">
+  <div class="exercice-header">
+    <div class="exercice-num">03</div>
+    <div>
+      <div class="exercice-titre">Méthode avec calcul — IMC</div>
+      <div class="difficulte">⏱ ~10 min</div>
+    </div>
+  </div>
+  <div class="enonce">
+    Crée une méthode <code>calculer_imc</code> qui prend <code>poids</code> (en kg) et
+    <code>taille</code> (en mètres) et retourne l'IMC arrondi à 1 décimale.
+    <br><br>
+    Crée ensuite une méthode <code>categorie_imc</code> qui prend un IMC et retourne
+    la catégorie : <code>"Insuffisance pondérale"</code> (< 18.5), <code>"Poids normal"</code>
+    (18.5–24.9), <code>"Surpoids"</code> (25–29.9), <code>"Obésité"</code> (>= 30).
+  </div>
+  <div class="contraintes">
+    <strong>CONTRAINTES</strong>
+    <ul>
+      <li>Formule IMC : poids / (taille * taille)</li>
+      <li>Utilise <code>.round(1)</code> pour arrondir</li>
+      <li>Utilise <code>if / elsif / else</code> dans la méthode catégorie</li>
+      <li>Affiche : <code>"IMC : 22.5 → Poids normal"</code></li>
+    </ul>
+  </div>
+  <details>
+    <summary>▶ VOIR LA CORRECTION</summary>
+    <div class="correction-body">
+<pre>def calculer_imc(poids, taille)
+  (poids / (taille * taille)).round(1)
+end
+
+def categorie_imc(imc)
+  if imc < 18.5
+    "Insuffisance pondérale"
+  elsif imc < 25
+    "Poids normal"
+  elsif imc < 30
+    "Surpoids"
+  else
+    "Obésité"
+  end
+end
+
+imc = calculer_imc(70, 1.75)
+puts "IMC : #{imc} → #{categorie_imc(imc)}"
+# => IMC : 22.9 → Poids normal</pre>
+    </div>
+  </details>
+</div>
+
+<!-- Exercice 4 -->
+<div class="exercice">
+  <div class="exercice-header">
+    <div class="exercice-num">04</div>
+    <div>
+      <div class="exercice-titre">Méthode récursive — compte à rebours</div>
+      <div class="difficulte">⏱ ~8 min · <span class="difficulte hard">plus difficile</span></div>
+    </div>
+  </div>
+  <div class="enonce">
+    Crée une méthode <code>compte_a_rebours</code> qui prend un entier <code>n</code> et
+    affiche les nombres de <code>n</code> jusqu'à <code>0</code>, puis affiche <code>"🚀 Décollage !"</code>.
+    <br><br>
+    Implémente-la d'abord avec une boucle <code>while</code>, puis en version récursive
+    (la méthode s'appelle elle-même).
+  </div>
+  <div class="contraintes">
+    <strong>CONTRAINTES</strong>
+    <ul>
+      <li>Version 1 : utilise <code>while n >= 0</code></li>
+      <li>Version 2 : la méthode doit s'appeler elle-même avec <code>n - 1</code></li>
+      <li>La version récursive doit avoir un cas de base (quand n < 0, arrêter)</li>
+      <li>Résultat attendu : <code>5, 4, 3, 2, 1, 0, 🚀 Décollage !</code></li>
+    </ul>
+  </div>
+  <details>
+    <summary>▶ VOIR LA CORRECTION</summary>
+    <div class="correction-body">
+<pre># Version boucle
+def compte_a_rebours_boucle(n)
+  while n >= 0
+    puts n
+    n -= 1
+  end
+  puts "🚀 Décollage !"
+end
+
+# Version récursive
+def compte_a_rebours(n)
+  return puts "🚀 Décollage !" if n < 0
+  puts n
+  compte_a_rebours(n - 1)
+end
+
+compte_a_rebours(5)</pre>
+      <div class="enonce" style="margin-top:0.75rem;">
+        💡 La récursion, c'est une méthode qui s'appelle elle-même jusqu'à atteindre un cas de base.
+        Sans cas de base → boucle infinie → erreur <code>SystemStackError</code>.
+      </div>
+    </div>
+  </details>
+</div>
+
+</body>
+</html>
