@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JS — JavaScript moderne — Session 1 — 12 mai 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0b0e1a; color: #e2e8f0; font-family: 'Syne', sans-serif; padding: 2rem; max-width: 860px; margin: 0 auto; }
+    h1 { color: #f5d800; font-size: 1.6rem; margin-bottom: .2rem; }
+    .meta { font-family: 'Share Tech Mono', monospace; color: #64748b; font-size: .8rem; margin-bottom: 2rem; }
+    .badge { display: inline-block; background: #60a5fa; color: #0b0e1a; font-family: 'Share Tech Mono', monospace; font-size: .7rem; font-weight: 700; padding: .15rem .5rem; border-radius: 2px; margin-right: .5rem; }
+    .intro { background: #111627; border: 1px solid #1e2a45; border-radius: 2px; padding: 1.5rem; margin-bottom: 2rem; }
+    .intro h2 { color: #f5d800; font-size: 1rem; margin-bottom: 1rem; }
+    .intro p, .intro li { color: #94a3b8; font-size: .9rem; line-height: 1.7; }
+    .intro ul { margin: .75rem 0 .75rem 1.25rem; }
+    .concept { margin-bottom: 1.25rem; }
+    .concept h3 { color: #60a5fa; font-size: .9rem; font-weight: 600; margin-bottom: .4rem; }
+    .exercice { background: #111627; border: 1px solid #1e2a45; border-radius: 2px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .exercice-header { display: flex; align-items: center; margin-bottom: 1rem; }
+    .exercice-num { font-family: 'Share Tech Mono', monospace; color: #f5d800; font-size: .75rem; margin-right: .75rem; }
+    .exercice h2 { font-size: 1.05rem; font-weight: 700; color: #f1f5f9; }
+    .exercice p, .exercice li { color: #94a3b8; font-size: .9rem; line-height: 1.65; }
+    .exercice ul { margin: .75rem 0 .75rem 1.25rem; }
+    .contraintes { background: #0b0e1a; border-left: 3px solid #f5d800; border-radius: 2px; padding: .75rem 1rem; margin: 1rem 0; }
+    .contraintes h4 { color: #f5d800; font-size: .8rem; font-family: 'Share Tech Mono', monospace; margin-bottom: .4rem; }
+    pre { background: #0b0e1a; border: 1px solid #1e2a45; border-radius: 2px; padding: 1rem; font-family: 'Share Tech Mono', monospace; font-size: .82rem; color: #c7d2fe; overflow-x: auto; margin: .75rem 0; line-height: 1.6; }
+    .tag-diff { font-family: 'Share Tech Mono', monospace; font-size: .7rem; padding: .1rem .4rem; border-radius: 2px; }
+    .diff-facile { background: #34d399; color: #0b0e1a; }
+    .diff-moyen  { background: #f5d800; color: #0b0e1a; }
+    .diff-challenge { background: #f87171; color: #0b0e1a; }
+    .duree { font-family: 'Share Tech Mono', monospace; font-size: .75rem; color: #475569; margin-top: .75rem; }
+    .note-locale { background: #0b0e1a; border: 1px solid #34d399; border-radius: 2px; padding: .6rem .9rem; margin-top: 1rem; font-size: .8rem; color: #34d399; font-family: 'Share Tech Mono', monospace; }
+    h2.section { color: #60a5fa; font-size: 1rem; border-bottom: 1px solid #1e2a45; padding-bottom: .5rem; margin: 2rem 0 1.25rem; }
+  </style>
+</head>
+<body>
+
+  <h1><span class="badge">JS</span>Session 1 — JavaScript moderne</h1>
+  <div class="meta">12 mai 2026 · Concepts : const/let · arrow functions · destructuring · spread · modules ES6 · ⏱ ~75 min</div>
+
+  <!-- ── INTRO (20%) ── -->
+  <div class="intro">
+    <h2>📖 Rappels essentiels — JavaScript moderne (ES6+)</h2>
+
+    <div class="concept">
+      <h3>const / let</h3>
+      <p><code>const</code> déclare une variable dont la liaison ne peut pas changer (≠ immuable). <code>let</code> permet de réassigner. Évite <code>var</code> : sa portée est capricieuse.</p>
+      <pre>const pi = 3.14        // ne peut pas être réassigné
+let compteur = 0
+compteur = compteur + 1  // OK</pre>
+    </div>
+
+    <div class="concept">
+      <h3>Arrow functions</h3>
+      <p>Syntaxe courte pour les fonctions. Si le corps est une seule expression, le <code>return</code> est implicite.</p>
+      <pre>const double = (n) => n * 2
+const saluer = (prenom) => `Bonjour, ${prenom} !`</pre>
+    </div>
+
+    <div class="concept">
+      <h3>Destructuring</h3>
+      <p>Extraire des valeurs d'un tableau ou d'un objet directement dans des variables.</p>
+      <pre>// Tableau
+const [premier, deuxieme] = [10, 20, 30]
+
+// Objet
+const { nom, age } = { nom: "Alice", age: 30, ville: "Paris" }</pre>
+    </div>
+
+    <div class="concept">
+      <h3>Spread operator <code>...</code></h3>
+      <p>Étale les éléments d'un tableau ou les propriétés d'un objet.</p>
+      <pre>const base = [1, 2, 3]
+const etendu = [...base, 4, 5]   // [1, 2, 3, 4, 5]
+
+const user = { nom: "Bob" }
+const userComplet = { ...user, role: "admin" }</pre>
+    </div>
+
+    <p style="margin-top:1rem; color:#475569; font-style:italic; font-size:.85rem">Les modules ES6 (import/export) seront abordés dans les exercices suivants. Pour l'instant, travaille dans un seul fichier ou dans la console du navigateur.</p>
+  </div>
+
+  <!-- ── EXERCICES (80%) ── -->
+  <h2 class="section">💻 Exercices</h2>
+
+  <!-- EX 1 -->
+  <div class="exercice">
+    <div class="exercice-header">
+      <span class="exercice-num">EX 01</span>
+      <h2>const, let et template literals</h2>
+      <span class="tag-diff diff-facile" style="margin-left:auto">facile</span>
+    </div>
+    <p>Déclare les variables suivantes et affiche les résultats avec <code>console.log</code> :</p>
+    <ul>
+      <li>Un <code>const prenom</code> avec ton prénom</li>
+      <li>Un <code>const anneeNaissance</code> avec une année</li>
+      <li>Un <code>let age</code> calculé depuis l'année en cours (2026)</li>
+      <li>Un message <code>const presentation</code> utilisant un template literal qui affiche : <code>"Je m'appelle [prenom], j'ai [age] ans."</code></li>
+      <li>Modifie <code>age</code> d'un an supplémentaire et affiche le nouveau message</li>
+    </ul>
+    <div class="contraintes">
+      <h4>CONTRAINTES</h4>
+      <p>— N'utilise pas <code>var</code><br>
+         — Tente de réassigner un <code>const</code> et observe l'erreur dans la console<br>
+         — Utilise uniquement des template literals (backticks) pour les chaînes qui incluent des variables</p>
+    </div>
+    <div class="duree">⏱ ~10 min</div>
+    <div class="note-locale">📁 Les corrections sont dans le fichier local : 2026-05-12_js_corrections.html</div>
+  </div>
+
+  <!-- EX 2 -->
+  <div class="exercice">
+    <div class="exercice-header">
+      <span class="exercice-num">EX 02</span>
+      <h2>Arrow functions — Transformer un tableau</h2>
+      <span class="tag-diff diff-facile" style="margin-left:auto">facile</span>
+    </div>
+    <p>Convertis les fonctions classiques suivantes en arrow functions, puis utilise-les avec <code>.map()</code> et <code>.filter()</code> :</p>
+    <pre>// Version classique — à convertir :
+function tripler(n) { return n * 3 }
+function estPair(n) { return n % 2 === 0 }
+function majuscule(str) { return str.toUpperCase() }</pre>
+    <p style="margin-top:.75rem">Une fois converties :</p>
+    <ul>
+      <li>Applique <code>tripler</code> sur <code>[1, 2, 3, 4, 5]</code> avec <code>.map()</code></li>
+      <li>Filtre les pairs de <code>[7, 4, 13, 8, 2, 11]</code> avec <code>.filter(estPair)</code></li>
+      <li>Passe tous les mots de <code>["hello", "world", "js"]</code> en majuscule</li>
+    </ul>
+    <div class="contraintes">
+      <h4>CONTRAINTES</h4>
+      <p>— Utilise la syntaxe compacte (retour implicite) pour chaque arrow function<br>
+         — Affiche chaque résultat avec <code>console.log</code></p>
+    </div>
+    <div class="duree">⏱ ~12 min</div>
+    <div class="note-locale">📁 Les corrections sont dans le fichier local : 2026-05-12_js_corrections.html</div>
+  </div>
+
+  <!-- EX 3 -->
+  <div class="exercice">
+    <div class="exercice-header">
+      <span class="exercice-num">EX 03</span>
+      <h2>Destructuring — Tableaux et objets</h2>
+      <span class="tag-diff diff-facile" style="margin-left:auto">facile</span>
+    </div>
+    <p>Tu as les données suivantes :</p>
+    <pre>const couleurs = ["rouge", "vert", "bleu", "jaune", "violet"]
+
+const utilisateur = {
+  id: 42,
+  nom: "Clément",
+  email: "clement@exemple.fr",
+  role: "admin",
+  ville: "Lyon"
+}</pre>
+    <p style="margin-top:.75rem">Avec le destructuring :</p>
+    <ul>
+      <li>Extrais les 3 premières couleurs dans <code>c1</code>, <code>c2</code>, <code>c3</code> (ignore les suivantes avec <code>_</code>)</li>
+      <li>Extrais <code>nom</code>, <code>email</code> et <code>ville</code> de <code>utilisateur</code> (en une seule ligne)</li>
+      <li>Renomme <code>nom</code> en <code>prenomUser</code> lors du destructuring</li>
+      <li>Ajoute une valeur par défaut : si <code>utilisateur.age</code> est absent, utilise <code>25</code></li>
+    </ul>
+    <div class="contraintes">
+      <h4>CONTRAINTES</h4>
+      <p>— Toutes les extractions en une seule déclaration (<code>const { ... } = ...</code>)<br>
+         — Affiche chaque variable extraite</p>
+    </div>
+    <div class="duree">⏱ ~12 min</div>
+    <div class="note-locale">📁 Les corrections sont dans le fichier local : 2026-05-12_js_corrections.html</div>
+  </div>
+
+  <!-- EX 4 -->
+  <div class="exercice">
+    <div class="exercice-header">
+      <span class="exercice-num">EX 04</span>
+      <h2>Spread & Rest — Fusionner et copier</h2>
+      <span class="tag-diff diff-moyen" style="margin-left:auto">moyen</span>
+    </div>
+    <p>Utilise le spread operator et le rest parameter pour résoudre les 4 cas suivants :</p>
+    <pre>const equipe1 = ["Alice", "Bob", "Charlie"]
+const equipe2 = ["Diana", "Ethan"]
+
+const config = { theme: "dark", langue: "fr", version: 2 }
+const override = { langue: "en", debug: true }</pre>
+    <ul>
+      <li><strong>a)</strong> Crée <code>equipeComplete</code> en fusionnant les deux équipes (sans modifier les originaux)</li>
+      <li><strong>b)</strong> Crée <code>equipeAvecCoach</code> en ajoutant <code>"Xavier"</code> en premier et <code>"Clément"</code> en dernier</li>
+      <li><strong>c)</strong> Crée <code>configFinale</code> en fusionnant <code>config</code> et <code>override</code> (les clés d'<code>override</code> écrasent celles de <code>config</code>)</li>
+      <li><strong>d)</strong> Écris une arrow function <code>somme(...nombres)</code> qui accepte n'importe quel nombre d'arguments et retourne leur somme</li>
+    </ul>
+    <div class="contraintes">
+      <h4>CONTRAINTES</h4>
+      <p>— Ne modifie jamais les tableaux/objets originaux<br>
+         — Vérifie que <code>config.langue</code> est toujours <code>"fr"</code> après la fusion</p>
+    </div>
+    <div class="duree">⏱ ~15 min</div>
+    <div class="note-locale">📁 Les corrections sont dans le fichier local : 2026-05-12_js_corrections.html</div>
+  </div>
+
+  <!-- EX 5 -->
+  <div class="exercice">
+    <div class="exercice-header">
+      <span class="exercice-num">EX 05</span>
+      <h2>Mini-projet — Gestionnaire de contacts</h2>
+      <span class="tag-diff diff-moyen" style="margin-left:auto">moyen</span>
+    </div>
+    <p>Crée un mini-gestionnaire de contacts en utilisant tous les concepts vus aujourd'hui.</p>
+    <pre>// Point de départ
+const contacts = [
+  { id: 1, nom: "Alice Martin", email: "alice@mail.fr", actif: true },
+  { id: 2, nom: "Bob Dupont", email: "bob@mail.fr", actif: false },
+  { id: 3, nom: "Charlie Durand", email: "charlie@mail.fr", actif: true },
+  { id: 4, nom: "Diana Morel", email: "diana@mail.fr", actif: false },
+]</pre>
+    <p style="margin-top:.75rem">À faire :</p>
+    <ul>
+      <li><strong>a)</strong> Arrow function <code>getActifs(liste)</code> → retourne uniquement les contacts actifs</li>
+      <li><strong>b)</strong> Arrow function <code>formatContact({ nom, email })</code> → retourne la chaîne <code>"[nom] &lt;[email]&gt;"</code> (utilise le destructuring dans les paramètres)</li>
+      <li><strong>c)</strong> Arrow function <code>ajouterContact(liste, nouveauContact)</code> → retourne un nouveau tableau avec le contact ajouté à la fin (sans modifier <code>liste</code>)</li>
+      <li><strong>d)</strong> Arrow function <code>mettreAJour(liste, id, changementsObj)</code> → retourne un nouveau tableau où le contact correspondant à <code>id</code> est mis à jour avec les propriétés de <code>changementsObj</code> (spread sur l'objet existant)</li>
+      <li><strong>e)</strong> Utilise ces 4 fonctions dans un enchaînement : ajoute un 5e contact, mets Alice en inactif, puis affiche tous les actifs formatés</li>
+    </ul>
+    <div class="contraintes">
+      <h4>CONTRAINTES</h4>
+      <p>— Toutes les fonctions sont des arrow functions avec retour implicite si possible<br>
+         — Aucune mutation des données originales (immuabilité)<br>
+         — Destructuring dans les paramètres de <code>formatContact</code></p>
+    </div>
+    <div class="duree">⏱ ~20 min</div>
+    <div class="note-locale">📁 Les corrections sont dans le fichier local : 2026-05-12_js_corrections.html</div>
+  </div>
+
+  <!-- EX 6 -->
+  <div class="exercice">
+    <div class="exercice-header">
+      <span class="exercice-num">EX 06</span>
+      <h2>Modules ES6 — import / export</h2>
+      <span class="tag-diff diff-challenge" style="margin-left:auto">challenge</span>
+    </div>
+    <p>Les modules ES6 permettent de diviser le code en fichiers réutilisables. Pour tester, crée deux fichiers (dans un dossier local ou avec un bundler comme Vite) :</p>
+    <pre>// Fichier : utils.js
+// À compléter :
+// 1. Export nommé : une fonction carre(n)
+// 2. Export nommé : une fonction somme(a, b)
+// 3. Export nommé : un tableau COULEURS = ["rouge", "vert", "bleu"]
+// 4. Export par défaut : une fonction saluer(prenom)</pre>
+    <pre>// Fichier : main.js
+// À compléter :
+// 1. Importe saluer (export default) depuis utils.js
+// 2. Importe { carre, somme, COULEURS } depuis utils.js
+// 3. Utilise chaque import et affiche les résultats</pre>
+    <p style="margin-top:.75rem"><strong>Alternative sans bundler :</strong> teste les modules directement dans le navigateur avec <code>&lt;script type="module"&gt;</code> dans un fichier HTML.</p>
+    <div class="contraintes">
+      <h4>CONTRAINTES</h4>
+      <p>— Un seul export <code>default</code> par fichier<br>
+         — Les exports nommés utilisent <code>export const ...</code><br>
+         — Essaie de renommer un import : <code>import { carre as puissance2 } from './utils.js'</code></p>
+    </div>
+    <div class="duree">⏱ ~15 min</div>
+    <div class="note-locale">📁 Les corrections sont dans le fichier local : 2026-05-12_js_corrections.html</div>
+  </div>
+
+</body>
+</html>

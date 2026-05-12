@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruby — Méthodes — 12 mai 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0b0e1a; color: #e2e8f0; font-family: 'Syne', sans-serif; padding: 2rem; max-width: 860px; margin: 0 auto; }
+    h1 { color: #f5d800; font-size: 1.6rem; margin-bottom: .2rem; }
+    .meta { font-family: 'Share Tech Mono', monospace; color: #64748b; font-size: .8rem; margin-bottom: 2rem; }
+    .badge { display: inline-block; background: #f87171; color: #0b0e1a; font-family: 'Share Tech Mono', monospace; font-size: .7rem; font-weight: 700; padding: .15rem .5rem; border-radius: 2px; margin-right: .5rem; }
+    .session-info { background: #111627; border: 1px solid #1e2a45; border-radius: 2px; padding: 1rem 1.25rem; margin-bottom: 2rem; font-size: .9rem; color: #94a3b8; }
+    .session-info strong { color: #f5d800; }
+    .exercice { background: #111627; border: 1px solid #1e2a45; border-radius: 2px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .exercice-header { display: flex; align-items: center; margin-bottom: 1rem; }
+    .exercice-num { font-family: 'Share Tech Mono', monospace; color: #f5d800; font-size: .75rem; margin-right: .75rem; }
+    .exercice h2 { font-size: 1.05rem; font-weight: 700; color: #f1f5f9; }
+    .exercice p, .exercice li { color: #94a3b8; font-size: .9rem; line-height: 1.65; }
+    .exercice ul { margin: .75rem 0 .75rem 1.25rem; }
+    .contraintes { background: #0b0e1a; border-left: 3px solid #f5d800; border-radius: 2px; padding: .75rem 1rem; margin: 1rem 0; }
+    .contraintes h4 { color: #f5d800; font-size: .8rem; font-family: 'Share Tech Mono', monospace; margin-bottom: .4rem; }
+    pre { background: #0b0e1a; border: 1px solid #1e2a45; border-radius: 2px; padding: 1rem; font-family: 'Share Tech Mono', monospace; font-size: .82rem; color: #c7d2fe; overflow-x: auto; margin: .75rem 0; line-height: 1.6; }
+    details { margin-top: 1rem; }
+    summary { cursor: pointer; font-family: 'Share Tech Mono', monospace; font-size: .8rem; color: #f5d800; padding: .5rem .75rem; background: #0b0e1a; border: 1px solid #f5d800; border-radius: 2px; display: inline-block; user-select: none; }
+    summary:hover { background: #f5d800; color: #0b0e1a; }
+    details[open] summary { background: #f5d800; color: #0b0e1a; }
+    .correction { background: #0b0e1a; border: 1px solid #1e2a45; border-radius: 2px; padding: 1rem; margin-top: .75rem; }
+    .correction p { color: #94a3b8; font-size: .85rem; margin-bottom: .5rem; }
+    .duree { font-family: 'Share Tech Mono', monospace; font-size: .75rem; color: #475569; margin-top: .75rem; }
+    .tag-diff { font-family: 'Share Tech Mono', monospace; font-size: .7rem; padding: .1rem .4rem; border-radius: 2px; }
+    .diff-facile { background: #34d399; color: #0b0e1a; }
+    .diff-moyen  { background: #f5d800; color: #0b0e1a; }
+    .diff-challenge { background: #f87171; color: #0b0e1a; }
+    .progress-bar { display: flex; gap: .3rem; margin-bottom: 2rem; }
+    .progress-bar span { flex: 1; height: 4px; background: #1e2a45; border-radius: 2px; }
+    .progress-bar span.done { background: #f87171; }
+  </style>
+</head>
+<body>
+
+  <h1><span class="badge">RUBY</span>Session 1 — Méthodes</h1>
+  <div class="meta">12 mai 2026 · Thème : Ruby fondamentaux · Difficulté : débutant · ⏱ ~35–45 min</div>
+
+  <div class="session-info">
+    <strong>Objectif de la session :</strong> Maîtriser la définition et l'utilisation des méthodes Ruby — paramètres, valeurs par défaut, valeur de retour implicite, et méthodes avec bloc.
+  </div>
+
+  <!-- ─── EX 1 ─── -->
+  <div class="exercice">
+    <div class="exercice-header">
+      <span class="exercice-num">EX 01</span>
+      <h2>Définir ses premières méthodes</h2>
+      <span class="tag-diff diff-facile" style="margin-left:auto">facile</span>
+    </div>
+    <p>En Ruby, une méthode se définit avec <code style="color:#f5d800">def</code>. Elle retourne automatiquement la valeur de la dernière expression évaluée.</p>
+    <p style="margin-top:.75rem">Définis les trois méthodes suivantes :</p>
+    <ul>
+      <li><code style="color:#f5d800">saluer(prenom)</code> → retourne <code>"Bonjour, [prenom] !"</code></li>
+      <li><code style="color:#f5d800">aire_rectangle(largeur, hauteur)</code> → retourne l'aire (largeur × hauteur)</li>
+      <li><code style="color:#f5d800">carre(n)</code> → retourne n²</li>
+    </ul>
+    <div class="contraintes">
+      <h4>CONTRAINTES</h4>
+      <p>— N'utilise pas <code>return</code> explicite (laisse Ruby retourner la dernière expression)<br>
+         — Teste chaque méthode avec au moins deux appels <code>puts</code></p>
+    </div>
+    <div class="duree">⏱ ~8 min</div>
+    <details>
+      <summary>▶ Voir la correction</summary>
+      <div class="correction">
+        <pre>def saluer(prenom)
+  "Bonjour, #{prenom} !"
+end
+
+def aire_rectangle(largeur, hauteur)
+  largeur * hauteur
+end
+
+def carre(n)
+  n * n
+end
+
+puts saluer("Alice")        # Bonjour, Alice !
+puts saluer("Bob")          # Bonjour, Bob !
+puts aire_rectangle(4, 5)   # 20
+puts aire_rectangle(10, 3)  # 30
+puts carre(7)               # 49
+puts carre(12)              # 144</pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ─── EX 2 ─── -->
+  <div class="exercice">
+    <div class="exercice-header">
+      <span class="exercice-num">EX 02</span>
+      <h2>Paramètres par défaut</h2>
+      <span class="tag-diff diff-facile" style="margin-left:auto">facile</span>
+    </div>
+    <p>Les paramètres par défaut permettent d'appeler une méthode sans fournir tous les arguments.</p>
+    <p style="margin-top:.75rem">Définis la méthode <code style="color:#f5d800">message_bienvenue(nom, langue = "fr")</code> qui :</p>
+    <ul>
+      <li>Si <code>langue == "fr"</code> → retourne <code>"Bienvenue, [nom] !"</code></li>
+      <li>Si <code>langue == "en"</code> → retourne <code>"Welcome, [nom]!"</code></li>
+      <li>Sinon → retourne <code>"Hello, [nom]."</code></li>
+    </ul>
+    <div class="contraintes">
+      <h4>CONTRAINTES</h4>
+      <p>— Utilise <code>if / elsif / else</code><br>
+         — Appelle la méthode sans le 2e argument, puis avec <code>"en"</code>, puis avec une autre valeur</p>
+    </div>
+    <div class="duree">⏱ ~8 min</div>
+    <details>
+      <summary>▶ Voir la correction</summary>
+      <div class="correction">
+        <pre>def message_bienvenue(nom, langue = "fr")
+  if langue == "fr"
+    "Bienvenue, #{nom} !"
+  elsif langue == "en"
+    "Welcome, #{nom}!"
+  else
+    "Hello, #{nom}."
+  end
+end
+
+puts message_bienvenue("Marie")         # Bienvenue, Marie !
+puts message_bienvenue("John", "en")    # Welcome, John!
+puts message_bienvenue("Yuki", "jp")    # Hello, Yuki.</pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ─── EX 3 ─── -->
+  <div class="exercice">
+    <div class="exercice-header">
+      <span class="exercice-num">EX 03</span>
+      <h2>Méthode avec plusieurs valeurs de retour</h2>
+      <span class="tag-diff diff-moyen" style="margin-left:auto">moyen</span>
+    </div>
+    <p>Ruby permet de retourner plusieurs valeurs d'une méthode sous forme de tableau implicite.</p>
+    <p style="margin-top:.75rem">Définis la méthode <code style="color:#f5d800">stats(nombres)</code> qui reçoit un tableau d'entiers et retourne un tableau <code>[min, max, somme, moyenne]</code>.</p>
+    <div class="contraintes">
+      <h4>CONTRAINTES</h4>
+      <p>— Utilise les méthodes Ruby <code>.min</code>, <code>.max</code>, <code>.sum</code><br>
+         — Calcule la moyenne en divisant par le nombre d'éléments<br>
+         — Destructure le résultat avec <code>min, max, somme, moy = stats([...])</code></p>
+    </div>
+    <pre># Exemple attendu :
+min, max, somme, moy = stats([4, 2, 9, 1, 7])
+puts min    # 1
+puts max    # 9
+puts somme  # 23
+puts moy    # 4.6</pre>
+    <div class="duree">⏱ ~8 min</div>
+    <details>
+      <summary>▶ Voir la correction</summary>
+      <div class="correction">
+        <pre>def stats(nombres)
+  min    = nombres.min
+  max    = nombres.max
+  somme  = nombres.sum
+  moyenne = somme.to_f / nombres.length
+  [min, max, somme, moyenne]
+end
+
+min, max, somme, moy = stats([4, 2, 9, 1, 7])
+puts min    # 1
+puts max    # 9
+puts somme  # 23
+puts moy    # 4.6
+
+min2, max2, _, _ = stats([10, 5, 8])
+puts "#{min2} / #{max2}"  # 5 / 10</pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ─── EX 4 ─── -->
+  <div class="exercice">
+    <div class="exercice-header">
+      <span class="exercice-num">EX 04</span>
+      <h2>Méthode récursive — Factorielle</h2>
+      <span class="tag-diff diff-moyen" style="margin-left:auto">moyen</span>
+    </div>
+    <p>Une méthode peut s'appeler elle-même : c'est la <strong>récursion</strong>. Chaque appel traite un cas plus petit jusqu'à atteindre un <em>cas de base</em>.</p>
+    <p style="margin-top:.75rem">Définis <code style="color:#f5d800">factorielle(n)</code> de façon récursive :</p>
+    <ul>
+      <li>Si <code>n == 0</code> → retourne <code>1</code> (cas de base)</li>
+      <li>Sinon → retourne <code>n * factorielle(n - 1)</code></li>
+    </ul>
+    <div class="contraintes">
+      <h4>CONTRAINTES</h4>
+      <p>— N'utilise pas de boucle<br>
+         — Teste avec 0, 1, 5, 10<br>
+         — Ajoute une garde : si <code>n &lt; 0</code>, lève une exception <code>ArgumentError</code></p>
+    </div>
+    <pre># Résultats attendus :
+# factorielle(0) → 1
+# factorielle(5) → 120
+# factorielle(10) → 3628800</pre>
+    <div class="duree">⏱ ~10 min</div>
+    <details>
+      <summary>▶ Voir la correction</summary>
+      <div class="correction">
+        <pre>def factorielle(n)
+  raise ArgumentError, "n doit être >= 0" if n < 0
+  return 1 if n == 0
+  n * factorielle(n - 1)
+end
+
+puts factorielle(0)   # 1
+puts factorielle(1)   # 1
+puts factorielle(5)   # 120
+puts factorielle(10)  # 3628800
+
+begin
+  factorielle(-3)
+rescue ArgumentError => e
+  puts "Erreur : #{e.message}"
+end</pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ─── EX 5 ─── -->
+  <div class="exercice">
+    <div class="exercice-header">
+      <span class="exercice-num">EX 05</span>
+      <h2>Mini-projet — Calculatrice Ruby</h2>
+      <span class="tag-diff diff-challenge" style="margin-left:auto">challenge</span>
+    </div>
+    <p>Combine tout ce que tu as vu pour construire une mini-calculatrice.</p>
+    <p style="margin-top:.75rem">Définis les méthodes suivantes :</p>
+    <ul>
+      <li><code style="color:#f5d800">additionner(a, b)</code></li>
+      <li><code style="color:#f5d800">soustraire(a, b)</code></li>
+      <li><code style="color:#f5d800">multiplier(a, b)</code></li>
+      <li><code style="color:#f5d800">diviser(a, b)</code> → retourne <code>nil</code> et affiche un message si <code>b == 0</code></li>
+      <li><code style="color:#f5d800">calculer(a, operateur, b)</code> → délègue à la bonne méthode selon <code>operateur</code> (<code>"+"</code>, <code>"-"</code>, <code>"*"</code>, <code>"/"</code>). Si l'opérateur est inconnu, retourne <code>"Opérateur inconnu"</code></li>
+    </ul>
+    <div class="contraintes">
+      <h4>CONTRAINTES</h4>
+      <p>— <code>calculer</code> utilise <code>case/when</code> ou des <code>if/elsif</code><br>
+         — Teste 6 appels différents à <code>calculer</code>, dont une division par zéro et un opérateur inconnu</p>
+    </div>
+    <div class="duree">⏱ ~12 min</div>
+    <details>
+      <summary>▶ Voir la correction</summary>
+      <div class="correction">
+        <pre>def additionner(a, b) = a + b
+def soustraire(a, b)  = a - b
+def multiplier(a, b)  = a * b
+
+def diviser(a, b)
+  if b == 0
+    puts "Erreur : division par zéro"
+    nil
+  else
+    a.to_f / b
+  end
+end
+
+def calculer(a, operateur, b)
+  case operateur
+  when "+" then additionner(a, b)
+  when "-" then soustraire(a, b)
+  when "*" then multiplier(a, b)
+  when "/" then diviser(a, b)
+  else "Opérateur inconnu"
+  end
+end
+
+puts calculer(10, "+", 5)   # 15
+puts calculer(10, "-", 3)   # 7
+puts calculer(4, "*", 7)    # 28
+puts calculer(9, "/", 3)    # 3.0
+puts calculer(5, "/", 0).inspect  # nil (+ message erreur)
+puts calculer(5, "%", 2)    # Opérateur inconnu</pre>
+      </div>
+    </details>
+  </div>
+
+</body>
+</html>
